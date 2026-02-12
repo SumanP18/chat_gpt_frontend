@@ -1,28 +1,29 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-import Home from './pages/home'
-import About from './pages/about'
-import Contact from './pages/contact'
-import Signup from './pages/signup'
-import Login from './pages/login'
-import Dashboard from './pages/dashboard'
-import Header from './components/header'
-import Footer from './components/footer'
+import Home from './pages/home.jsx'
+import Signup from './pages/signup.jsx'
+import Login from './pages/login.jsx'
+import Dashboard from './pages/dashboard.jsx'
+import Admin from './pages/admin.jsx'
+import Header from './components/header.jsx'
+import Footer from './components/footer.jsx'
 
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-      <Footer />
+      <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+        <Header />
+        <main className="flex-1 bg-white dark:bg-gray-950">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   )
 }
