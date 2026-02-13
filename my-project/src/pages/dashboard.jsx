@@ -30,6 +30,7 @@ import {
     Image as ImageIcon,
     Download
 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 // Initialize PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
@@ -325,7 +326,7 @@ const Dashboard = () => {
         if (finalMessage.startsWith('/image ')) {
             const prompt = finalMessage.replace('/image ', '').trim();
             try {
-                const response = await fetch('http://127.0.0.1:8000/generate_image', {
+                const response = await fetch(`${API_BASE_URL}/generate_image`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -351,7 +352,7 @@ const Dashboard = () => {
         }
 
         try {
-            const res = await fetch('http://127.0.0.1:8000/ai_response', {
+            const res = await fetch(`${API_BASE_URL}/ai_response`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ message: finalMessage })
