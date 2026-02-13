@@ -20,6 +20,7 @@ import {
     CheckCircle2,
     AlertCircle
 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -41,10 +42,10 @@ const Admin = () => {
             const token = localStorage.getItem('access_token');
             try {
                 const [statsRes, convoRes, usersRes, settingsRes] = await Promise.all([
-                    fetch('http://127.0.0.1:8000/admin/stats', { headers: { 'Authorization': `Bearer ${token}` } }),
-                    fetch('http://127.0.0.1:8000/admin/recent_conversations', { headers: { 'Authorization': `Bearer ${token}` } }),
-                    fetch('http://127.0.0.1:8000/admin/top_users', { headers: { 'Authorization': `Bearer ${token}` } }),
-                    fetch('http://127.0.0.1:8000/admin/settings', { headers: { 'Authorization': `Bearer ${token}` } })
+                    fetch(`${API_BASE_URL}/admin/stats`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_BASE_URL}/admin/recent_conversations`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_BASE_URL}/admin/top_users`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_BASE_URL}/admin/settings`, { headers: { 'Authorization': `Bearer ${token}` } })
                 ]);
 
                 if (statsRes.ok) setStats(await statsRes.json());
@@ -70,7 +71,7 @@ const Admin = () => {
     const handleUpdateSetting = async (key, value) => {
         const token = localStorage.getItem('access_token');
         try {
-            const res = await fetch('http://127.0.0.1:8000/admin/settings', {
+            const res = await fetch(`${API_BASE_URL}/admin/settings`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
